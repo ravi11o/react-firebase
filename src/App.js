@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import './App.css';
-
+import firestore from '../firebase';
 // function App() {
 //   return (
 //     <div className="App">
@@ -16,7 +16,9 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    console.log('setup firebase')
+    const posts = firestore.collection().get();
+    console.log(posts);
+
   }
 
   render() {
