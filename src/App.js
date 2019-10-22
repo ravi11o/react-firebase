@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import './App.css';
-import firestore from '../firebase';
+import { firestore } from './firebase';
 // function App() {
 //   return (
 //     <div className="App">
@@ -15,10 +15,10 @@ import firestore from '../firebase';
 
 class App extends Component {
 
-  componentDidMount() {
-    const posts = firestore.collection().get();
+  componentDidMount = async () => {
+    const snapshot = await firestore.collection('posts').get();
+    const posts = snapshot.docs.map(doc => { return {id: doc.id, ...doc.data() } });
     console.log(posts);
-
   }
 
   render() {
