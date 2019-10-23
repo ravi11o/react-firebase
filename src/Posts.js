@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 class Posts extends Component {
   render() {
     return (
-      <div>
-        <h2>List of Posts</h2>
+      <div className="container is-fullhd">
+        <div className="notification">
+          <h2>List of Posts</h2>
+        </div>
       </div>
     );
   };
