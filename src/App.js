@@ -1,36 +1,49 @@
 import React,{ Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import './App.css';
+import Home from './Home';
+import Posts from './Posts';
 import { firestore } from './firebase';
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <h2>
-//           Welcome to Firebase
-//         </h2>
-//       </header>
-//     </div>
-//   );
-// }
+
+
 
 class App extends Component {
 
-  componentDidMount = async () => {
-    const snapshot = await firestore.collection('posts').get();
-    const posts = snapshot.docs.map(doc => { return {id: doc.id, ...doc.data() } });
-    console.log(posts);
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts : []
+    }
   }
+
+  // componentDidMount = async () => {
+  //   const snapshot = await firestore.collection('posts').get();
+  //   const posts = snapshot.docs.map(doc => { return {id: doc.id, ...doc.data() } });
+  //   this.setState({ posts })
+  // }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h2>
-            Welcome to Firebase
-          </h2>
-        </header>
-      </div>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/posts">Posts</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/posts" component={Posts} />
+          </Switch>
+        </div>
+      </Router>
     );
+    
   }
   
 }
